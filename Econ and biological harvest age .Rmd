@@ -12,10 +12,10 @@ si <- 14
 #=$I$51/(1-EXP(-$I$51*B53))
 age <- 1:150
 df <- data.frame(age)
-df$CAI <- vol_spruce_gizachew_2012(SI = si, spacing = 4, age = df$age, method = "CAI")
-df$volume <- vol_spruce_gizachew_2012(SI = si, spacing = 4, age = df$age, method = "Volume")
+df$CAI <- vol_spruce_gizachew_2012(SI = si, spacing = 4, age = df$age, method = "CAI") # Current annual increment (CAI)
+df$volume <- vol_spruce_gizachew_2012(SI = si, spacing = 4, age = df$age, method = "Volume") #Volume
 df$MAI <- df$volume / df$age
-df$return_25 <- i_25 / (1 -exp(-i_25 * df$age))
+df$return_25 <- i_25 / (1 -exp(-i_25 * df$age)) #
 df$return_35 <- i_35 / (1 -exp(-i_35 * df$age))
 df$return_45 <- i_45 / (1 -exp(-i_45 * df$age))
 df$diff_vol <- df$CAI - df$MAI
@@ -23,10 +23,10 @@ df$diff_vol <- df$CAI - df$MAI
 #(1-exp(-i_25*10))
 df$vol_retur <- df$CAI/df$volume
 df$diff <- df$return_25 - df$vol_retur
-which.min(abs(df$return_25 - df$vol_retur))
-which.min(abs(df$return_35 - df$vol_retur))
-which.min(abs(df$return_45 - df$vol_retur))
-which.min(abs(ifelse(df$age < 10,100,df$CAI - df$MAI)))
+which.min(abs(df$return_25 - df$vol_retur)) # Finds the harvesting age with a 2.5% expected return 
+which.min(abs(df$return_35 - df$vol_retur)) # Finds the harvesting age with a 2.5% expected return 
+which.min(abs(df$return_45 - df$vol_retur)) # Finds the harvesting age with a 2.5% expected return 
+which.min(abs(ifelse(df$age < 10,100,df$CAI - df$MAI))) # Finds the biological optimal harvesting age 
 ```
 
 ```{r}
