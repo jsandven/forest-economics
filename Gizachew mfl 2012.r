@@ -1,17 +1,6 @@
----
-title: "R Notebook"
-output: html_notebook
----
+#https://www.researchgate.net/publication/263718137_Stand_responses_to_initial_spacing_in_Norway_spruce_plantations_in_Norway
+#Gizachew
 
-https://www.researchgate.net/publication/263718137_Stand_responses_to_initial_spacing_in_Norway_spruce_plantations_in_Norway
-Gizachew
-
-```{r setup}
-library(tidyverse)
-```
-
-
-```{r}
 SI <- 26
 spacing <- 4
 age <- 1:200
@@ -76,19 +65,18 @@ ba_spruce_gizachew_2012 <-
     
   }
 
-vol_spruce_gizachew_2012(SI = 26,spacing = 4,age = 1:200, method = "CAI")
-ba_spruce_gizachew_2012(SI = 26,spacing = 4,age = 1:200, method = "CAI")
+#vol_spruce_gizachew_2012(SI = 26,spacing = 4,age = 1:200, method = "CAI")
+#ba_spruce_gizachew_2012(SI = 26,spacing = 4,age = 1:200, method = "CAI")
 #di and dk are the random plot and random experiment effects, respectively.
 
-df <- data.frame(age)
-df$CAI <- vol_spruce_gizachew_2012(SI = 26, spacing = 4, age = df$age, method = "CAI")
-df$y <- vol_spruce_gizachew_2012(SI = 26, spacing = 4, age = df$age, method = "Volume")
-df$MAI <- df$y / age
+#df <- data.frame(age)
+#df$CAI <- vol_spruce_gizachew_2012(SI = 26, spacing = 4, age = df$age, method = "CAI")
+#df$y <- vol_spruce_gizachew_2012(SI = 26, spacing = 4, age = df$age, method = "Volume")
+#df$MAI <- df$y / age
 
-ggplot(df, aes(x = age)) +
-  geom_line(aes(y = CAI), color = "black") +
-  geom_line(aes(y = MAI), color = "black", linetype = "twodash") + ylab("m3/ha/år") + xlab("Alder") +  xlim(0, 110)
-```
+#ggplot(df, aes(x = age)) +
+#  geom_line(aes(y = CAI), color = "black") +
+#  geom_line(aes(y = MAI), color = "black", linetype = "twodash") + ylab("m3/ha/år") + xlab("Alder") +  xlim(0, 110)
 
 
 
