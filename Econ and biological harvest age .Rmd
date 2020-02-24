@@ -4,6 +4,7 @@ output: html_notebook
 ---
 
 ```{r}
+source()
 i_25 <- 2.5 / 100
 i_35 <- 3.5 / 100
 i_45 <- 4.5 / 100
