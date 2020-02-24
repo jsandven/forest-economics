@@ -1,0 +1,46 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+i_25 <- 2.5 / 100
+i_35 <- 3.5 / 100
+i_45 <- 4.5 / 100
+si <- 14
+#=$I$51/(1-EXP(-$I$51*B53))
+age <- 1:150
+df <- data.frame(age)
+df$CAI <- vol_spruce_gizachew_2012(SI = si, spacing = 4, age = df$age, method = "CAI")
+df$volume <- vol_spruce_gizachew_2012(SI = si, spacing = 4, age = df$age, method = "Volume")
+df$MAI <- df$volume / df$age
+df$return_25 <- i_25 / (1 -exp(-i_25 * df$age))
+df$return_35 <- i_35 / (1 -exp(-i_35 * df$age))
+df$return_45 <- i_45 / (1 -exp(-i_45 * df$age))
+df$diff_vol <- df$CAI - df$MAI
+#V'(t)/V(t) (%)
+#(1-exp(-i_25*10))
+df$vol_retur <- df$CAI/df$volume
+df$diff <- df$return_25 - df$vol_retur
+which.min(abs(df$return_25 - df$vol_retur))
+which.min(abs(df$return_35 - df$vol_retur))
+which.min(abs(df$return_45 - df$vol_retur))
+which.min(abs(ifelse(df$age < 10,100,df$CAI - df$MAI)))
+```
+
+```{r}
+ggplot(df, aes(x = age)) +
+  geom_line(aes(y = diff_vol), color = "red") +
+  geom_line(aes(y = CAI), color = "black") +
+  geom_line(aes(y = MAI), color = "black", linetype = "twodash") + ylab("m3/ha/år") + xlab("Alder") +  xlim(0, 110)
+
+```
+
+```{r}
+ggplot(df, aes(x = age)) +
+  geom_line(aes(y = return_25), color = "red") +
+  geom_line(aes(y = return_35), color = "blue") +
+  geom_line(aes(y = return_45), color = "green") +
+  geom_line(aes(y = vol_retur), color = "black", linetype = "twodash") + ylab("%") + xlab("Alder") +  ylim(0, .1)
+```
+

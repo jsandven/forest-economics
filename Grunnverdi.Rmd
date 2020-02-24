@@ -1,0 +1,44 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+http://hdl.handle.net/11250/2587945
+
+Dx rånettoverdi av et tynningsuttak ved bestandsalder x
+Hn rånettoverdi av slutthogst ved bestandsalder n
+G grunnverdi
+c skogkulturutgifter (inkl. diskonterte utgifter til ungskogpleie)
+Vq venteverdi ved bestandsalder q
+t ventetid på naturlig gjenvekst
+p rentefot (desimalformat) 
+
+
+```{r grunnverdi}
+n <- 60
+p <- 0.025
+gjentaksfaktor <- ((1 + p) ^ n)/((1+p)^n-1)
+
+#Tynning 
+tynning_uttak <- 10 #m3/da
+netto_tynning <- 80 #kr/m3 
+Dx <- 8 * 100 #Rånetto tynning
+#Hogst 
+hogst_uttak <- 30 #m3/da
+netto_hogst <- 300 #kr/m3
+x <- 45 #Alder tynning 
+Hn <- 25 * 295 #
+B = Dx * (1 + p) ^ -x + Hn * (1 + p) ^ -n
+Bt = B * gjentaksfaktor
+#Kostnader
+kost_planting <- 800
+kost_ungskog <- 300 #m3/daa
+ungskogpleie <- 300 * (1 + p) ^ -8 # Diskonter tilbake til etableringstidsupunktet. 
+c <- kost_planting + ungskogpleie
+
+#Grunnverdi
+G1 = Bt - c * ((1+p)^n / ((1+p)^n - 1))
+
+G2 = Bt - Bt * (1 - ((1 + p) ^ n - 1) / ((1 + p) ^ (n+1) - 1))
+Bt
+```
+
